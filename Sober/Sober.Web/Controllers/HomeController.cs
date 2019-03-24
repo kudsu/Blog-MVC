@@ -14,8 +14,8 @@ namespace Sober.Web.Controllers
         public ActionResult Index()
         {
 
-            var aa = NoticeService.GetCount(n => true);
-            var bb = NoticeService.GetEntitiesByPage(3, 1, true, n => n.eid > 100, n => n.elook);
+            //var aa = NoticeService.GetCount(n => true);
+            //var bb = NoticeService.GetEntitiesByPage(3, 1, true, n => n.eid > 100, n => n.elook);
             var cc = NoticeService.GetEntity(b => b.eid == 1);
 
 

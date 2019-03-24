@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container main-container">
+    <div class="row">
+        <div class="span8 blog news-list">
+            <article class="clearfix">
+                    <a href="./blog-single.htm.html"><img src="~/Content/img/gallery/gallery-img-8-4col.jpg" alt="Post Thumb" class="align-left" /></a>
+                    <h4 class="title-bg"><a href="./blog-single.htm.html">一位短跑运动员的孤独</a></h4>
+                    <p>
+                        一群人乱哄哄地下了车，另一群又匆匆挤上去。叮——叮！曼哈顿的车哐啷哐啷地开走了，约翰·帕金斯混在下车的人群中，随人流挪动着脚步。
+                    </p>
+                    <button class="btn btn-mini btn-inverse" type="button">Read more</button>
+                    <div class="post-summary-footer">
+                        <ul class="post-data-3">
+                            <li><i class="icon-calendar"></i> 09/04/15</li>
+                            <li><i class="icon-user"></i> <a href="#">Admin</a></li>
+                            <li><i class="icon-comment"></i> <a href="#">5 Comments</a></li>
+                            <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+            <!-- Pagination -->
+            <div class="pagination" id="example">
+                <ul id="pageLimit">
+                    <li class="active"><a href="#">Prev</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>
+        </div>
+
+        @Html.Partial("_PartialPageRight")
+
+    </div>
+</div>
+<script>
+    $(function () {
+        GetNewsList(1, 0)
+        function GetNewsList(pageIndex, recc) {
+            $.get("/News/GetNewsByPage", {
+                PageIndex: 1,
+                pageSize: 5
+            }, function (r) {
+                if (r.Success) {
+                    var json = eval("(" + r.Msg + ")");
+                    var html = " <li>暂无数据</li>";
+                    if (json == null) {
+                        $(".news-list").html(html);
+                        return;
+                    }
+                    html = "";
+
+                    for (var i = 0; i < 5; i++) {
+                        html += "<article class='clearfix'>" +
+                            "<a href='./blog-single.htm.html'><img src='/Content/img/gallery/gallery-img-8-4col.jpg' alt='Post Thumb' class='align-left' /></a >" +
+                            "<h4 class='title-bg'><a href='/News/NewDetails?id=" + json[i].eid +"'>" + json[i].etitle + "</a></h4>" +
+                            "<p>" + json[i].edigest + "...</p>" +
+                            "<button class='btn btn-mini btn-inverse' type='button'>阅读更多</button>" +
+                            "<div class='post-summary-footer'>" +
+                            "<ul class='post-data-3'>" +
+                            "<li><i class='icon-calendar'></i>" + json[i].edate.substr(0, 10) + "</li>" +
+                            "<li><i class='icon-user'></i> <a href='#'>" + json[i].eauthor + "</a></li>" +
+                            "<li><i class='icon-comment'></i> <a href='#'>" + json[i].esay + "</a></li>" +
+                            "<li><i class='icon-eye-open'></i> <a href='#'>" + json[i].elook + "</a></li>" +
+                            "<li><i class='icon-tags'></i> <a href='#'>photoshop</a>, <a href='#'>tutorials</a></li>" +
+                            "</ul>" +
+                            "</div>" +
+                            "</article >";
+                    }
+                    $(".news-list").html(html);
+
+                } else {
+
+                }
+            });
+        }
+    })
+
+</script>
+

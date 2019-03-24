@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.prettyPhoto.js"></script>
+    <script src="~/Scripts/jquery.flexslider.js"></script>
+    <script src="~/Scripts/jquery.custom.js"></script>
+    <script src="~/Scripts/bootstrap-paginator.js"></script>
+    @RenderSection("Style", false)
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="~/Content/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="~/Content/css/flexslider.css" rel="stylesheet" />
+    <link href="~/Content/css/custom-styles.css" rel="stylesheet" />
+</head>
+<body>
+    @RenderPage("_PartialPageHeader.cshtml")
+    @RenderBody()
+    @RenderPage("_PartialPageFooter.cshtml")
+    @RenderSection("Script", false)
+</body>
+</html>
