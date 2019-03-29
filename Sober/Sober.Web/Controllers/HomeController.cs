@@ -13,11 +13,11 @@ namespace Sober.Web.Controllers
         public IeverydaynewsService NoticeService { get; set; }
         public ActionResult Index()
         {
-
+            int recc = 0;
             //var aa = NoticeService.GetCount(n => true);
-            //var bb = NoticeService.GetEntitiesByPage(3, 1, true, n => n.eid > 100, n => n.elook);
+            var bb = NoticeService.GetEntitiesByPage(3, 1, true, n => n.eid > 100, n => n.elook,ref recc);
             var cc = NoticeService.GetEntity(b => b.eid == 1);
-
+            
 
             return View();
         }

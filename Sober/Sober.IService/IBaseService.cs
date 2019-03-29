@@ -19,6 +19,6 @@ namespace Sober.IService
         int GetCount(Func<TEntity, bool> whereLambda);
         TEntity GetEntity(Func<TEntity,bool>whereLambda);
         IEnumerable<TEntity> GetEntities(Func<TEntity, bool> whereLambda);
-        IEnumerable<TEntity> GetEntitiesByPage<TType>(int pageSize, int pageIndex, bool isAsc, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TType>> orderByLambd);
+        IEnumerable<TEntity> GetEntitiesByPage<TType>(int pageSize, int pageIndex, bool isAsc, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TType>> orderByLambd, ref int recc);
     }
 }

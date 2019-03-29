@@ -3,12 +3,20 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
+<link href="~/Content/css/am-pagination.css" rel="stylesheet" />
+<style>
+    .am-pagination-default {
+        /*margin-top: -75px;*/
+        width: 770px;
+        margin: 0 auto;
+    }
+</style>
 
 <div class="container main-container">
     <div class="row">
         <div class="span8 blog news-list">
             <article class="clearfix">
-                    <a href="./blog-single.htm.html"><img src="~/Content/img/gallery/gallery-img-8-4col.jpg" alt="Post Thumb" class="align-left" /></a>
+                @*<a href="./blog-single.htm.html"><img src="~/Content/img/gallery/gallery-img-8-4col.jpg" alt="Post Thumb" class="align-left" /></a>
                     <h4 class="title-bg"><a href="./blog-single.htm.html">一位短跑运动员的孤独</a></h4>
                     <p>
                         一群人乱哄哄地下了车，另一群又匆匆挤上去。叮——叮！曼哈顿的车哐啷哐啷地开走了，约翰·帕金斯混在下车的人群中，随人流挪动着脚步。
@@ -21,68 +29,65 @@
                             <li><i class="icon-comment"></i> <a href="#">5 Comments</a></li>
                             <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a></li>
                         </ul>
-                    </div>
-                </article>
-
+                    </div>*@
+            </article>
             <!-- Pagination -->
-            <div class="pagination" id="example">
-                <ul id="pageLimit">
-                    <li class="active"><a href="#">Prev</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </div>
+            <div id="ampaginationsm"></div>
         </div>
-
         @Html.Partial("_PartialPageRight")
-
     </div>
 </div>
+<script src="~/Scripts/am-pagination.js"></script>
 <script>
     $(function () {
-        GetNewsList(1, 0)
-        function GetNewsList(pageIndex, recc) {
+
+        GetNewsList(1)
+        function GetNewsList(pageIndex) {
             $.get("/News/GetNewsByPage", {
-                PageIndex: 1,
+                PageIndex: pageIndex,
                 pageSize: 5
             }, function (r) {
-                if (r.Success) {
-                    var json = eval("(" + r.Msg + ")");
-                    var html = " <li>暂无数据</li>";
-                    if (json == null) {
-                        $(".news-list").html(html);
-                        return;
-                    }
+                var json = eval("(" + r + ")");
+                //debugger;
+                if (json.Status == "2") {
                     html = "";
-
-                    for (var i = 0; i < 5; i++) {
+                    for (var i = 0; i < json.Data.length; i++) {
                         html += "<article class='clearfix'>" +
-                            "<a href='./blog-single.htm.html'><img src='/Content/img/gallery/gallery-img-8-4col.jpg' alt='Post Thumb' class='align-left' /></a >" +
-                            "<h4 class='title-bg'><a href='/News/NewDetails?id=" + json[i].eid +"'>" + json[i].etitle + "</a></h4>" +
-                            "<p>" + json[i].edigest + "...</p>" +
+                            "<a href='./NewsDetaile?id=" + json.Data[i].eid + "'><img src='/Content/img/gallery/gallery-img-8-4col.jpg' alt='Post Thumb' class='align-left' /></a >" +
+                            "<h4 class='title-bg'><a href='./NewsDetaile?id=" + json.Data[i].eid + "'>" + json.Data[i].etitle + "</a></h4>" +
+                            "<p>" + json.Data[i].edigest + "...</p>" +
                             "<button class='btn btn-mini btn-inverse' type='button'>阅读更多</button>" +
                             "<div class='post-summary-footer'>" +
                             "<ul class='post-data-3'>" +
-                            "<li><i class='icon-calendar'></i>" + json[i].edate.substr(0, 10) + "</li>" +
-                            "<li><i class='icon-user'></i> <a href='#'>" + json[i].eauthor + "</a></li>" +
-                            "<li><i class='icon-comment'></i> <a href='#'>" + json[i].esay + "</a></li>" +
-                            "<li><i class='icon-eye-open'></i> <a href='#'>" + json[i].elook + "</a></li>" +
+                            "<li><i class='icon-calendar'></i>" + DateTranslate(json.Data[i].edate).substr(0, 10) + "</li>" +
+                            "<li><i class='icon-user'></i> <a href='#'>" + json.Data[i].eauthor + "</a></li>" +
+                            "<li><i class='icon-comment'></i> <a href='#'>" + json.Data[i].esay + "</a></li>" +
+                            "<li><i class='icon-eye-open'></i> <a href='#'>" + json.Data[i].elook + "</a></li>" +
                             "<li><i class='icon-tags'></i> <a href='#'>photoshop</a>, <a href='#'>tutorials</a></li>" +
                             "</ul>" +
                             "</div>" +
                             "</article >";
                     }
-                    $(".news-list").html(html);
-
-                } else {
-
+                    $(".clearfix").html(html);
+                    if (pageIndex == 1) {
+                        var pagersm = window.amPagination('#ampaginationsm', {
+                            page: pageIndex,
+                            totals: json.Recc,
+                            pageSize: 5,
+                            btnSize: 'sm'
+                        });
+                        jQuery('#ampaginationsm').on('am.pagination.change', function (e) {
+                            GetNewsList(e.page)
+                        });
+                    }
+                }
+                else if (json.Status == "1") {
+                    console.log(1)
+                }
+                else {
+                    console.log(2)
                 }
             });
         }
     })
-
 </script>
-

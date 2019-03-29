@@ -19,7 +19,7 @@ namespace Sober.IRepository
         int QueryCount(Func<TEntity, bool> whereLambda);
         TEntity QueryEntity(Func<TEntity,bool>whereLambda);
         IEnumerable<TEntity> QueryEntities(Func<TEntity, bool> whereLambda);
-        IEnumerable<TEntity> QueryEntitiesByPage<TType>(int pageSize,int pageIndex,bool isAsc,Expression< Func<TEntity,bool>>whereLambda,Expression< Func<TEntity,TType>> orderByLambd);
+        IEnumerable<TEntity> QueryEntitiesByPage<TType>(int pageSize,int pageIndex,bool isAsc,Expression< Func<TEntity,bool>>whereLambda,Expression< Func<TEntity,TType>> orderByLambd,ref int recc);
     }
 
    

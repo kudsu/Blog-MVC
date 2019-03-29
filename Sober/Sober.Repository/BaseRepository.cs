@@ -48,10 +48,11 @@ namespace Sober.Repository
         /// <param name="whereLambda">查询条件</param>
         /// <param name="orderByLambd">排序条件</param>
         /// <returns></returns>
-        public IEnumerable<TEntity> QueryEntitiesByPage<TType>(int pageSize, int pageIndex, bool isAsc, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TType>> orderByLambd)
+        public IEnumerable<TEntity> QueryEntitiesByPage<TType>(int pageSize, int pageIndex, bool isAsc, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TType>> orderByLambd, ref int recc)
         {
             var result = _dbSet.Where(whereLambda);
             result = isAsc ? result.OrderBy(orderByLambd) : result.OrderByDescending(orderByLambd);
+            recc = result.Count();
             var offset = (pageIndex - 1) * pageSize;
             //skip是跳过多少个元素，take从序列开头初获取几个元素
             result = result.Skip(offset).Take(pageSize);

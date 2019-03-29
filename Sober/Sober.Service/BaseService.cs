@@ -33,9 +33,9 @@ namespace Sober.Service
             return _baseRepository.QueryEntities(whereLambda);
         }
 
-        public IEnumerable<TEntity> GetEntitiesByPage<TType>(int pageSize, int pageIndex, bool isAsc, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TType>> orderByLambd)
+        public IEnumerable<TEntity> GetEntitiesByPage<TType>(int pageSize, int pageIndex, bool isAsc, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TType>> orderByLambd, ref int recc)
         {
-            return _baseRepository.QueryEntitiesByPage(pageSize,pageIndex,isAsc,whereLambda,orderByLambd);
+            return _baseRepository.QueryEntitiesByPage(pageSize,pageIndex,isAsc,whereLambda,orderByLambd,ref recc);
         }
 
         public TEntity GetEntity(Func<TEntity, bool> whereLambda)
