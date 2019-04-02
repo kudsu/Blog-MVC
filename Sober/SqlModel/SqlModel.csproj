@@ -54,6 +54,7 @@
     <Compile Include="everydaynews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlModel.cs" />
+    <Compile Include="V_everydaynews.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

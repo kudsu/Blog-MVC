@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4、IDAL数据接口层", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2、IBLL业务接口层", "2、IBLL业务接口层", "{463E1EFC-55EE-43CB-8CF4-5949E395B641}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{5778A863-8FB4-4705-AE0B-B961DF7C58A9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6、Model实体层", "6、Model实体层", "{5778A863-8FB4-4705-AE0B-B961DF7C58A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sober.Web", "Sober.Web\Sober.Web.csproj", "{B1F18786-E63F-43DE-9E1E-5876B4022A80}"
 EndProject
@@ -70,7 +70,7 @@ Global
 		{25F3522D-C987-418A-B6CF-F307CFDF2AEE} = {5778A863-8FB4-4705-AE0B-B961DF7C58A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C0E475FB-1AA6-4FDC-B559-BBDA63948FE6}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {C0E475FB-1AA6-4FDC-B559-BBDA63948FE6}
 	EndGlobalSection
 EndGlobal

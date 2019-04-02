@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlowFish.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="IeverydaynewsService.cs" />
+    <Compile Include="IV_everydaynewsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RespondModel.cs" />
   </ItemGroup>

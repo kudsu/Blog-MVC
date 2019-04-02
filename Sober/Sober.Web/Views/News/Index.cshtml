@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
@@ -37,15 +39,16 @@
         @Html.Partial("_PartialPageRight")
     </div>
 </div>
+<script src="~/Scripts/MyJs.js"></script>
 <script src="~/Scripts/am-pagination.js"></script>
 <script>
     $(function () {
-
-        GetNewsList(1)
-        function GetNewsList(pageIndex) {
+        GetNewsList(1, "")
+        function GetNewsList(pageIndex, keywowd) {
             $.get("/News/GetNewsByPage", {
                 PageIndex: pageIndex,
-                pageSize: 5
+                pageSize: 5,
+                KeyWord: keywowd
             }, function (r) {
                 var json = eval("(" + r + ")");
                 //debugger;
@@ -53,7 +56,7 @@
                     html = "";
                     for (var i = 0; i < json.Data.length; i++) {
                         html += "<article class='clearfix'>" +
-                            "<a href='./NewsDetaile?id=" + json.Data[i].eid + "'><img src='/Content/img/gallery/gallery-img-8-4col.jpg' alt='Post Thumb' class='align-left' /></a >" +
+                            "<a href='./NewsDetaile?id=" + base64encode(json.Data[i].eid) + "'><img src='/Content/img/gallery/gallery-img-8-4col.jpg' alt='Post Thumb' class='align-left' /></a >" +
                             "<h4 class='title-bg'><a href='./NewsDetaile?id=" + json.Data[i].eid + "'>" + json.Data[i].etitle + "</a></h4>" +
                             "<p>" + json.Data[i].edigest + "...</p>" +
                             "<button class='btn btn-mini btn-inverse' type='button'>阅读更多</button>" +
@@ -74,10 +77,10 @@
                             page: pageIndex,
                             totals: json.Recc,
                             pageSize: 5,
-                            btnSize: 'sm'
+                            btnSize: ''
                         });
                         jQuery('#ampaginationsm').on('am.pagination.change', function (e) {
-                            GetNewsList(e.page)
+                            GetNewsList(e.page, "")
                         });
                     }
                 }

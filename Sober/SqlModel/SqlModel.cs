@@ -13,6 +13,7 @@ namespace SqlModel
         }
 
         public virtual DbSet<everydaynews> everydaynews { get; set; }
+        public virtual DbSet<V_everydaynews> V_everydaynews { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -22,6 +23,16 @@ namespace SqlModel
                 .IsUnicode(false);
 
             modelBuilder.Entity<everydaynews>()
+                .Property(e => e.isvalid)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<V_everydaynews>()
+                .Property(e => e.state)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<V_everydaynews>()
                 .Property(e => e.isvalid)
                 .IsFixedLength()
                 .IsUnicode(false);
