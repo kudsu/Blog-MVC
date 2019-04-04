@@ -12,7 +12,7 @@ namespace Sober.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
-        private SqlModel.SqlModel _dbContext = DbContextFactory.Instance;
+        private SqlModel.newsEntities _dbContext = DbContextFactory.Instance;
         private DbSet<TEntity> _dbSet;
         public BaseRepository()
         {

@@ -51,14 +51,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="everydaynews.cs" />
+    <Compile Include="everydaynews.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlModel.cs" />
-    <Compile Include="V_everydaynews.cs" />
+    <Compile Include="SqlModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_everydaynews.cs">
+      <DependentUpon>SqlModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="SqlModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SqlModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SqlModel.edmx.diagram">
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+      <LastGenOutput>SqlModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SqlModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlModel.edmx</DependentUpon>
+      <LastGenOutput>SqlModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

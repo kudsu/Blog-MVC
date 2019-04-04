@@ -1,10 +1,8 @@
 ﻿using Sober.IService;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -12,6 +10,13 @@ namespace Sober.Web.Controllers
 {
     public class NewsController : Controller
     {
+
+        private static string Conn = ConfigurationManager.ConnectionStrings["newsDBConn"].ToString();
+        //string sql = "select * from  everydaynews where eid=@RecordID ";
+        //SqlParameter[] parameter = new SqlParameter[]{
+        //            new SqlParameter("@RecordID", "1")
+        //        };
+        //DataTable dt1 = SqlHelper.ExecuteDataset(Conn, CommandType.Text, sql, parameter).Tables[0];
         Common zjk = new Common();
         public IeverydaynewsService ieverydaynewsService { get; set; }
         public IV_everydaynewsService iv_everydaynewsService { get; set; }
@@ -58,16 +63,22 @@ namespace Sober.Web.Controllers
         }
         public ActionResult aa()
         {
-            var bb= System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile("16位MD5加密（取32位加密的9~25字符）", "MD5").ToLower();
+            string sql = "select distinct(eauthor) from everydaynews";
+            DataTable dt1 = SqlHelper.ExecuteDataset(Conn, CommandType.Text, sql).Tables[0];
+            for (int i = 0; i < dt1.Rows.Count; i++)
+            {
+                SqlHelper.ExecuteNonQuery(Conn, CommandType.Text, "insert into Users (UserName,Password) values('"+dt1.Rows[i][0]+"','0000')");
+            }
             return View();
         }
-        public object GetNewsDetails(int id)
+        public object GetNewsDetails(string id)//
         {
+            var sssd = Convert.ToInt32(Convert.ToString(Convert.ToInt32(id, 16), 10));
             RespondModel result = new RespondModel();
             result.Status = Codestatus.OK;
             try
             {
-                var list = ieverydaynewsService.GetEntity(n => n.eid == id);
+                var list = ieverydaynewsService.GetEntity(n => n.eid == Convert.ToInt32(Convert.ToString(Convert.ToInt32(id, 16), 10)));
                 if (list == null)
                 {
                     result.Status = Codestatus.NO;
@@ -80,7 +91,6 @@ namespace Sober.Web.Controllers
                 JavaScriptSerializer jss = new JavaScriptSerializer();
                 string myJson = jss.Serialize(result);
                 return myJson;
-
             }
             catch (Exception ex)
             {

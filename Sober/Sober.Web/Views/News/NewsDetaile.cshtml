@@ -118,18 +118,13 @@
     </div>
 
 </div> <!-- End Container -->
-
+<script src="~/Scripts/MyJs.js"></script>
 <script>
     $(function () {
-        $('#aa').on("click", function () {
-            var addd = "据媒体报道，<a href='http://news.hexun.com/guangdong/index.html' target='_blank'>广东</a>省雷州市水务局欠";
-            addd = addd.replace(/(<\/?a.*?>)/g, '');
-            alert(addd)
-        })
-        GetNewsList();
-        function GetNewsList() {
+        GetNewsDetails();
+        function GetNewsDetails() {
             $.get("/News/GetNewsDetails", {
-                ID:18939
+                id: getQueryString("sign")
             }, function (r) {
                 var json = eval("(" + r + ")");
                 if (json.Status == "2") {

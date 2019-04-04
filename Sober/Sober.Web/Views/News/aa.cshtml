@@ -3,11 +3,14 @@
     ViewBag.Title = "aa";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
-
+<button class="btn btn-mini btn-inverse" type="button" onclick="lookmore(1)">阅读更多</button>
 <input id="aa" type="button" value="去掉" />
 <script src="~/Scripts/MyJs.js"></script>
 <script>
     $('#aa').on("click", function () {
         var oStr = md5("16位MD5加密（取32位加密的9~25字符）");
     })
+    function lookmore(aa) {
+        alert(aa)
+    }
 </script>

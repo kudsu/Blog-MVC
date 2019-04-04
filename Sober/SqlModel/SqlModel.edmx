@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="newsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“news.dbo.everydaynews”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="everydaynews">
+          <Key>
+            <PropertyRef Name="eid" />
+          </Key>
+          <Property Name="eid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edate" Type="datetime" />
+          <Property Name="eauthor" Type="nvarchar" MaxLength="20" />
+          <Property Name="eupdate" Type="datetime" />
+          <Property Name="eupdateuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="etitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="edigest" Type="nvarchar" MaxLength="200" />
+          <Property Name="econtent" Type="nvarchar(max)" />
+          <Property Name="elook" Type="int" />
+          <Property Name="esay" Type="int" />
+          <Property Name="ewc" Type="int" />
+          <Property Name="state" Type="char" MaxLength="1" />
+          <Property Name="isvalid" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="32" />
+          <Property Name="State" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“news.dbo.V_everydaynews”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_everydaynews">
+          <Key>
+            <PropertyRef Name="eid" />
+          </Key>
+          <Property Name="eid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edate" Type="datetime" />
+          <Property Name="eauthor" Type="nvarchar" MaxLength="20" />
+          <Property Name="eupdate" Type="datetime" />
+          <Property Name="eupdateuser" Type="nvarchar" MaxLength="20" />
+          <Property Name="etitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="edigest" Type="nvarchar" MaxLength="200" />
+          <Property Name="elook" Type="int" />
+          <Property Name="esay" Type="int" />
+          <Property Name="ewc" Type="int" />
+          <Property Name="state" Type="char" MaxLength="1" />
+          <Property Name="isvalid" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityContainer Name="newsModelStoreContainer">
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="everydaynews" EntityType="Self.everydaynews" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [everydaynews].[eid] AS [eid], 
+    [everydaynews].[edate] AS [edate], 
+    [everydaynews].[eauthor] AS [eauthor], 
+    [everydaynews].[eupdate] AS [eupdate], 
+    [everydaynews].[eupdateuser] AS [eupdateuser], 
+    [everydaynews].[etitle] AS [etitle], 
+    [everydaynews].[edigest] AS [edigest], 
+    [everydaynews].[econtent] AS [econtent], 
+    [everydaynews].[elook] AS [elook], 
+    [everydaynews].[esay] AS [esay], 
+    [everydaynews].[ewc] AS [ewc], 
+    [everydaynews].[state] AS [state], 
+    [everydaynews].[isvalid] AS [isvalid]
+    FROM [dbo].[everydaynews] AS [everydaynews]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_everydaynews" EntityType="Self.V_everydaynews" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_everydaynews].[eid] AS [eid], 
+    [V_everydaynews].[edate] AS [edate], 
+    [V_everydaynews].[eauthor] AS [eauthor], 
+    [V_everydaynews].[eupdate] AS [eupdate], 
+    [V_everydaynews].[eupdateuser] AS [eupdateuser], 
+    [V_everydaynews].[etitle] AS [etitle], 
+    [V_everydaynews].[edigest] AS [edigest], 
+    [V_everydaynews].[elook] AS [elook], 
+    [V_everydaynews].[esay] AS [esay], 
+    [V_everydaynews].[ewc] AS [ewc], 
+    [V_everydaynews].[state] AS [state], 
+    [V_everydaynews].[isvalid] AS [isvalid]
+    FROM [dbo].[V_everydaynews] AS [V_everydaynews]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="newsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="everydaynews">
+          <Key>
+            <PropertyRef Name="eid" />
+          </Key>
+          <Property Name="eid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edate" Type="DateTime" Precision="3" />
+          <Property Name="eauthor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="eupdate" Type="DateTime" Precision="3" />
+          <Property Name="eupdateuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="etitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="edigest" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="econtent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="elook" Type="Int32" />
+          <Property Name="esay" Type="Int32" />
+          <Property Name="ewc" Type="Int32" />
+          <Property Name="state" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="isvalid" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_everydaynews">
+          <Key>
+            <PropertyRef Name="eid" />
+          </Key>
+          <Property Name="eid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edate" Type="DateTime" Precision="3" />
+          <Property Name="eauthor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="eupdate" Type="DateTime" Precision="3" />
+          <Property Name="eupdateuser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="etitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="edigest" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="elook" Type="Int32" />
+          <Property Name="esay" Type="Int32" />
+          <Property Name="ewc" Type="Int32" />
+          <Property Name="state" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="isvalid" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="newsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="everydaynews" EntityType="Self.everydaynews" />
+          <EntitySet Name="V_everydaynews" EntityType="Self.V_everydaynews" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="newsModelStoreContainer" CdmEntityContainer="newsEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="newsModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="everydaynews">
+            <EntityTypeMapping TypeName="newsModel.everydaynews">
+              <MappingFragment StoreEntitySet="everydaynews">
+                <ScalarProperty Name="eid" ColumnName="eid" />
+                <ScalarProperty Name="edate" ColumnName="edate" />
+                <ScalarProperty Name="eauthor" ColumnName="eauthor" />
+                <ScalarProperty Name="eupdate" ColumnName="eupdate" />
+                <ScalarProperty Name="eupdateuser" ColumnName="eupdateuser" />
+                <ScalarProperty Name="etitle" ColumnName="etitle" />
+                <ScalarProperty Name="edigest" ColumnName="edigest" />
+                <ScalarProperty Name="econtent" ColumnName="econtent" />
+                <ScalarProperty Name="elook" ColumnName="elook" />
+                <ScalarProperty Name="esay" ColumnName="esay" />
+                <ScalarProperty Name="ewc" ColumnName="ewc" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="isvalid" ColumnName="isvalid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_everydaynews">
+            <EntityTypeMapping TypeName="newsModel.V_everydaynews">
+              <MappingFragment StoreEntitySet="V_everydaynews">
+                <ScalarProperty Name="eid" ColumnName="eid" />
+                <ScalarProperty Name="edate" ColumnName="edate" />
+                <ScalarProperty Name="eauthor" ColumnName="eauthor" />
+                <ScalarProperty Name="eupdate" ColumnName="eupdate" />
+                <ScalarProperty Name="eupdateuser" ColumnName="eupdateuser" />
+                <ScalarProperty Name="etitle" ColumnName="etitle" />
+                <ScalarProperty Name="edigest" ColumnName="edigest" />
+                <ScalarProperty Name="elook" ColumnName="elook" />
+                <ScalarProperty Name="esay" ColumnName="esay" />
+                <ScalarProperty Name="ewc" ColumnName="ewc" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="isvalid" ColumnName="isvalid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

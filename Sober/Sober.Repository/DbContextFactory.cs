@@ -14,16 +14,16 @@ namespace Sober.Repository
         /// 数据上下文工厂（请求/线程单例）
         /// </summary>
         /// <returns></returns>
-        public static SqlModel.SqlModel Instance
+        public static SqlModel.newsEntities Instance
         {
             get
             {
                 //CallContext是线程槽，一个请求对应一个线程，也就是一个线程槽
                 //如果数据上下文存在，就直接获取，如果不存在则创建
-                var _dbContext = CallContext.GetData("dbContext") as SqlModel.SqlModel;
+                var _dbContext = CallContext.GetData("dbContext") as SqlModel.newsEntities;
                 if (_dbContext == null)
                 {
-                    _dbContext = new SqlModel.SqlModel();
+                    _dbContext = new SqlModel.newsEntities();
                     CallContext.SetData("dbContext", _dbContext);
                 }
                 return _dbContext;
